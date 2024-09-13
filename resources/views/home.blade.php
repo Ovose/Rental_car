@@ -1,39 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная страница</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-            background-color: #f4f4f4;
-        }
-        .message {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        .button {
-            background-color: #e74c3c; /* Красный цвет */
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-        }
-        .button:hover {
-            background-color: #c0392b;
-        }
-    </style>
-</head>
-<body>
-    <div class="message">Добро пожаловать на главную страницу!</div>
-    <a href="{{ route('about') }}" class="button">Перейти на страницу "О нас"</a>
-    <a href="{{ route('tables') }}" class="button">Список таблиц</a>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('title', 'Аренда автомобилей')
+
+@section('content')
+<div class="container">
+    <h1>Добро пожаловать в сервис аренды автомобилей</h1>
+    <p>Мы предлагаем широкий выбор автомобилей на любой вкус и бюджет. Найдите идеальный автомобиль для ваших нужд.</p>
+    
+    <div class="car-selection">
+        <h2>Наши автомобили</h2>
+        <div class="car-list">
+            @foreach ($cars as $car)
+                <div class="car-item">
+                    <h3>{{ $car->model }}</h3>
+                    <p>{{ $car->description }}</p>
+                    <a href="{{ route('cars.show', $car->id) }}" class="btn">Подробнее</a>
+                </div>
+            @endforeach
+        </div>
+    </div>
+    
+    <div class="contact-info">
+        <h2>Свяжитесь с нами</h2>
+        <p>Телефон: +123123213123</p>
+        <p>Email: info@rental-car.local</p>
+    </div>
+</div>
+@endsection

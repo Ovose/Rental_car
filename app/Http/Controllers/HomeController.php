@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\CarService;
 
 class HomeController extends Controller
 {
-     public function index()
+    protected $carService;
+
+    public function __construct(CarService $carService)
     {
-        return view('home');
+        $this->carService = $carService;
+    }
+
+    public function index()
+    {
+        $cars = $this->carService->getAllCars();
+        return view('home', compact('cars'));
     }
 }
